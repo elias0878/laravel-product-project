@@ -1,0 +1,53 @@
+# Docker Ignore File for Laravel
+# ملف استثناءات Docker لتطبيق لارافيل
+
+# ملفات Git
+.git
+.gitignore
+
+# ملفات IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ملفات البيئة
+.env
+.env.example
+.env.local
+.env.*.local
+
+# مجلدات التطوير
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# ملفات الاختبار
+phpunit.xml
+.phpunit*
+vendor/test/
+vendor/tests/
+
+# ملفات التطوير المحلية
+storage/logs/
+*.log
+.DS_Store
+Thumbs.db
+
+# ملفات التكوين الخاصة
+.htaccess
+.htpasswd
+
+# مجلدات الاختبار والتطوير
+tests/
+database/migrations/*.sqlite
+coverage/
+.php-cs-fixer.php
+.php-cs-fixer.dist.php
+pint.json
+
+# ملفات IDE الخاصة
+.phpunit.result.cache
+
+# مجلدات GitHub Actions
+.github/
