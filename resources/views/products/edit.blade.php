@@ -45,7 +45,7 @@
         <label for="image">{{ trans('messages.image') }}</label>
         @if($product->image)
             <div class="current-image">
-                <img src="{{ asset('images/products/' . $product->image) }}" alt="{{ trans('messages.current_image') }}" style="max-width: 200px;">
+                <img src="{{ asset('images/products/' . $product->image) }}" alt="{{ trans('messages.current_image') }}">
                 <p>{{ trans('messages.current_image') }}</p>
             </div>
         @endif
@@ -55,7 +55,7 @@
 
     <div class="form-actions">
         <button type="submit" class="btn btn-primary">{{ trans('messages.save') }}</button>
-        <a href="{{ route('products.index') }}" class="btn btn-secondary">{{ trans('messages.cancel') }}</a>
+        <a href="{{ route('products.index') }}" class="btn btn-info">{{ trans('messages.cancel') }}</a>
     </div>
 </form>
 @endsection

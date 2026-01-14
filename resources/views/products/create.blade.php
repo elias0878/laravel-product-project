@@ -47,7 +47,7 @@
 
     <div class="form-actions">
         <button type="submit" class="btn btn-primary">{{ trans('messages.save') }}</button>
-        <a href="{{ route('products.index') }}" class="btn btn-secondary">{{ trans('messages.cancel') }}</a>
+        <a href="{{ route('products.index') }}" class="btn btn-info">{{ trans('messages.cancel') }}</a>
     </div>
 </form>
 @endsection

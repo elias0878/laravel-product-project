@@ -6,8 +6,8 @@
 <div class="page-header">
     <h1>{{ $product->name }}</h1>
     <div class="action-buttons">
-        <a href="{{ route('products.edit', $product) }}" class="btn btn-edit">{{ trans('messages.edit') }}</a>
-        <a href="{{ route('products.index') }}" class="btn btn-secondary">{{ trans('messages.back') }}</a>
+        <a href="{{ route('products.edit', $product) }}" class="btn btn-warning">{{ trans('messages.edit') }}</a>
+        <a href="{{ route('products.index') }}" class="btn btn-info">{{ trans('messages.back') }}</a>
     </div>
 </div>
 
