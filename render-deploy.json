@@ -1,0 +1,19 @@
+{
+  "name": "laravel-product-app",
+  "type": "web_service",
+  "ownerId": "tea-d5jpsb14tr6s73b0osbg",
+  "repo": "https://github.com/elias0878/laravel-product-project.git",
+  "branch": "master",
+  "dockerfilePath": "Dockerfile",
+  "dockerContext": ".",
+  "serviceDetails": {
+    "envVars": [
+      {"key": "APP_ENV", "value": "production"},
+      {"key": "APP_DEBUG", "value": "false"},
+      {"key": "LOG_CHANNEL", "value": "stderr"},
+      {"key": "DB_CONNECTION", "value": "sqlite"},
+      {"key": "DB_DATABASE", "value": "/app/database/database.sqlite"}
+    ]
+  },
+  "plan": "free"
+}
