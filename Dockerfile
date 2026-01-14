@@ -18,19 +18,13 @@ COPY . .
 
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
+# إعداد الصلاحيات
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# تفعيل mod_rewrite
 RUN a2enmod rewrite
 
-# إعدادات Apache
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
-
-# تفعيل AllowOverride All للسماح لـ .htaccess بالعمل
-RUN echo '<Directory /var/www/html>' >> /etc/apache2/apache2.conf
-RUN echo '    Options Indexes FollowSymLinks' >> /etc/apache2/apache2.conf
-RUN echo '    AllowOverride All' >> /etc/apache2/apache2.conf
-RUN echo '    Require all granted' >> /etc/apache2/apache2.conf
-RUN echo '</Directory>' >> /etc/apache2/apache2.conf
+# === الخطوة الحاسمة: نسخ ملف الإعدادات المخصص ===
+COPY laravel.conf /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 80
