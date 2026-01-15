@@ -37,7 +37,12 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = uniqid() . '_' . time() . '.' . $image->getClientOriginalExtension();
+            
+            // تعيين umask لضمان صلاحيات صحيحة
+            $old = umask(0);
             $image->move(public_path('images/products'), $imageName);
+            umask($old);
+            
             $data['image'] = $imageName;
         }
 
@@ -74,12 +79,17 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             // حذف الصورة القديمة
             if ($product->image && file_exists(public_path('images/products/' . $product->image))) {
-                unlink(public_path('images/products/' . $product->image));
+                @unlink(public_path('images/products/' . $product->image));
             }
 
             $image = $request->file('image');
             $imageName = uniqid() . '_' . time() . '.' . $image->getClientOriginalExtension();
+            
+            // تعيين umask لضمان صلاحيات صحيحة
+            $old = umask(0);
             $image->move(public_path('images/products'), $imageName);
+            umask($old);
+            
             $data['image'] = $imageName;
         }
 
@@ -94,9 +104,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        // حذف الصورة
+        // حذف الصورة (مع التحقق من الصلاحيات)
         if ($product->image && file_exists(public_path('images/products/' . $product->image))) {
-            unlink(public_path('images/products/' . $product->image));
+            @unlink(public_path('images/products/' . $product->image));
         }
 
         $product->delete();
