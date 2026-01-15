@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', trans('messages.app_name'))</title>
-    <link rel="stylesheet" href="//laravel-product-project.onrender.com/css/app.css">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
     <div class="container">

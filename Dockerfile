@@ -23,6 +23,9 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     libonig-dev \
+    nodejs \
+    npm \
+    && npm install -g npm@latest \
     && docker-php-ext-install pdo pdo_mysql zip bcmath \
     && a2enmod rewrite \
     && rm -rf /var/lib/apt/lists/*
@@ -41,11 +44,17 @@ RUN echo '<IfModule mod_rewrite.c>\n    RewriteEngine On\n    RewriteCond %{HTTP
 # نسخ تطبيق لارافيل
 # Copy Laravel application
 COPY --from=builder /app/vendor /app/vendor
+COPY package.json package-lock.json* ./
+
+# تثبيت تبعيات npm وبناء الأصول
+# Install npm dependencies and build assets
+RUN npm ci --only=production && npm run build
+
 COPY . /app
 
 # تعيين صلاحيات المجلدات
 # Set folder permissions
-RUN chown -R www-data:www-data /app \
+RUN chown -R www-data:www-data /app/public/build \
     && chmod -R 755 /app/storage /app/bootstrap/cache \
     && mkdir -p /app/public/images/products \
     && chown -R www-data:www-data /app/public/images/products \
