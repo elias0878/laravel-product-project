@@ -60,6 +60,11 @@ RUN chown -R www-data:www-data /app/public/build \
     && chown -R www-data:www-data /app/public/images/products \
     && chmod -R 775 /app/public/images/products
 
+# إنشاء هيكل المجلدات الصحيح ومنح الصلاحيات الكاملة
+RUN mkdir -p /var/www/html/public/images/products
+RUN chown -R www-data:www-data /var/www/html/public
+RUN chmod -R 775 /var/www/html/public
+
 # نسخ ملف دخول Docker
 # Copy Docker entrypoint
 COPY docker-entrypoint.sh /usr/local/bin/

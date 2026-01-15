@@ -106,7 +106,11 @@ class ProductController extends Controller
     {
         // حذف الصورة (مع التحقق من الصلاحيات)
         if ($product->image && file_exists(public_path('images/products/' . $product->image))) {
-            @unlink(public_path('images/products/' . $product->image));
+            try {
+                @unlink(public_path('images/products/' . $product->image));
+            } catch (\Throwable $e) {
+                // Continue silently if image delete fails
+            }
         }
 
         $product->delete();
