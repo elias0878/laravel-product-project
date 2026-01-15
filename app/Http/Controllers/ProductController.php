@@ -104,15 +104,10 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        // كود الحذف الآمن الجديد
         if ($product->image) {
-            $imagePath = public_path('images/products/' . $product->image);
-            if (file_exists($imagePath)) {
-                // محاولة الحذف مع كتم الأخطاء باستخدام الرمز @
-                @unlink($imagePath);
-            }
+            // استخدام @ لمنع ظهور أي خطأ إذا فشل الحذف
+            @unlink(public_path('images/products/' . $product->image));
         }
-
         $product->delete();
 
         return redirect()->route('products.index')
