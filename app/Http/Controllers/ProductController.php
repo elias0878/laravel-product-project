@@ -104,12 +104,12 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        // حذف الصورة (مع التحقق من الصلاحيات)
-        if ($product->image && file_exists(public_path('images/products/' . $product->image))) {
-            try {
-                @unlink(public_path('images/products/' . $product->image));
-            } catch (\Throwable $e) {
-                // Continue silently if image delete fails
+        // كود الحذف الآمن الجديد
+        if ($product->image) {
+            $imagePath = public_path('images/products/' . $product->image);
+            if (file_exists($imagePath)) {
+                // محاولة الحذف مع كتم الأخطاء باستخدام الرمز @
+                @unlink($imagePath);
             }
         }
 
